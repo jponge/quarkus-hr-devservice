@@ -17,29 +17,29 @@ public class CatalogApi {
   private static final Logger logger = LoggerFactory.getLogger(CatalogApi.class);
 
   @GET
-  public Multi<Product> list() {
-    logger.info("list");
+  public Multi<Product> listProducts() {
+    logger.info("listProducts");
     return Product.all();
   }
 
   @POST
   @Transactional
-  public Uni<Product> register(Product product) {
+  public Uni<Product> createProduct(Product product) {
     logger.info("register");
     return product.persistAndFlush().replaceWith(product);
   }
 
   @GET
   @Path("/{id}")
-  public Uni<Product> byId(@PathParam("id") Long id) {
-    logger.info("byId");
+  public Uni<Product> getProduct(@PathParam("id") Long id) {
+    logger.info("createProduct");
     return Product.findById(id);
   }
 
   @GET
   @Path("/named/{name}")
-  public Uni<Product> find(@PathParam("name") String name) {
-    logger.info("find");
+  public Uni<Product> getProductByName(@PathParam("name") String name) {
+    logger.info("getProductByName");
     return Product.findByName(name);
   }
 }
